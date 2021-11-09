@@ -1,0 +1,21 @@
+#sidebar_pages ul li {
+  list-style: none;
+  margin: 10px auto;
+  width: 100%;
+  height: 25px;
+  /* background-color: wheat; */
+  font-size: 20px;
+  color: rgb(119, 119, 119);
+}
+#sidebar_pages ul {
+  margin-top: 10px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+#sidebar_pages ul li:hover {
+  color: #333;
+  font-weight: 600;
+}
