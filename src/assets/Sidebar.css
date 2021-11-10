@@ -37,33 +37,34 @@
   margin: 10px 0;
   font-weight: 600;
   cursor: auto;
-  padding-bottom: 2px;
+  /* padding-bottom: 2px; */
+  padding: 0 5px 2px 5px;
 }
 #history_btn:hover {
   background-color: rgb(41, 41, 41);
   color: white;
 }
 
-#history_btn span:nth-child(1) {
-  color: white;
-  line-height: 20px;
-  margin-right: 10px;
-  background-color: rgb(54, 101, 255);
+#add_btn {
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 30px;
+  height: 30px;
+  outline: none;
+  border: none;
+  background-color: #227aff;
 }
-/* HISTORY BUTTON */
-#history_btn span:nth-child(1) #io_add {
-  color: rgb(255, 255, 255);
-  font-weight: 700;
-  cursor: pointer;
+#add_btn #io_add {
+  color: white;
 }
-#history_btn span:nth-child(3) #md_cancel {
-  color: rgb(255, 66, 66);
-  font-size: 20px;
-  cursor: pointer;
+
+#remove_btn {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  outline: none;
+  border: none;
+  background-color: red;
+}
+#remove_btn #md_cancel {
+  color: white;
 }
