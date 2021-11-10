@@ -1,20 +1,40 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import "../assets/Home.css";
-import Sidebar from "../pages/Sidebar";
-const Home = () => {
+import "../assets/Card.css";
+
+const Home = ({ data }) => {
+  console.log("from home comp", data);
   return (
-    <div>
-      <Container>
-        <Row id="home_container" className="">
-          <Col md={3} id="links_page">
-            <Sidebar />
-          </Col>
-          <Col md={6} id="main_page"></Col>
-          <Col md={3} id="search_page"></Col>
-        </Row>
-      </Container>
-    </div>
+    <Row>
+      {Object.entries(data).length > 0 &&
+        data.hits.map((item, index) => {
+          return (
+            <Col md={4} key={index}>
+              <Card id="card">
+                <div id="card_img_capsul">
+                  <Card.Img
+                    variant="top"
+                    src={item.recipe.image}
+                    alt={item.recipe.Title}
+                    className="img-fluid"
+                  />
+                </div>
+                <Card.Body className="text-center" id="card_body">
+                  <p id="card_title">{item.recipe.label}</p>
+                  <button
+                    variant="primary"
+                    className="mx-auto"
+                    id="card_button"
+                  >
+                    view item
+                  </button>
+                </Card.Body>
+              </Card>
+            </Col>
+          );
+        })}
+    </Row>
   );
 };
 
