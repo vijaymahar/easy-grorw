@@ -72,7 +72,7 @@ const App = () => {
                 <Route path="allergies" element={<Allergies />} />
                 <Route path="diets" element={<Diets />} />
                 <Route path="nutrients" element={<Nutrients />} />
-                <Route path="/item:itemId" exact element={<Overview />} />
+                <Route path="/overview" exact element={<Overview />} />
               </Routes>
             </Container>
           </Col>

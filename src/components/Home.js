@@ -2,8 +2,11 @@ import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import "../assets/Home.css";
 import "../assets/Card.css";
+import OverviewItem from "../redux/actions/OverviewItem";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 const Home = ({ data }) => {
+  const dispatch = useDispatch();
   return (
     <Row>
       {Object.entries(data).length > 0 &&
@@ -25,7 +28,8 @@ const Home = ({ data }) => {
                     variant="primary"
                     className="mx-auto"
                     id="card_button"
-                    to={`/:${item.recipe.image}`}
+                    to="/overview"
+                    onClick={() => dispatch(OverviewItem(item))}
                   >
                     view item
                   </Link>
