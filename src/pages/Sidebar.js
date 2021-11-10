@@ -1,6 +1,7 @@
 import React from "react";
 import "../assets/Sidebar.css";
 import SidebarData from "../data/SidebarData";
+import { Link } from "react-router-dom";
 const Sidebar = () => {
   return (
     <div id="sidebar_pages">
@@ -8,7 +9,9 @@ const Sidebar = () => {
         {SidebarData.map((item, index) => {
           return (
             <li key={item.id}>
-              <a href={item.link}>{item.name}</a>
+              <Link to={item.link} id="page_links">
+                {item.name}
+              </Link>
             </li>
           );
         })}

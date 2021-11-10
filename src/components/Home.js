@@ -2,9 +2,8 @@ import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import "../assets/Home.css";
 import "../assets/Card.css";
-
+import { Link } from "react-router-dom";
 const Home = ({ data }) => {
-  console.log("from home comp", data);
   return (
     <Row>
       {Object.entries(data).length > 0 &&
@@ -22,13 +21,14 @@ const Home = ({ data }) => {
                 </div>
                 <Card.Body className="text-center" id="card_body">
                   <p id="card_title">{item.recipe.label}</p>
-                  <button
+                  <Link
                     variant="primary"
                     className="mx-auto"
                     id="card_button"
+                    to={`/:${item.recipe.image}`}
                   >
                     view item
-                  </button>
+                  </Link>
                 </Card.Body>
               </Card>
             </Col>
