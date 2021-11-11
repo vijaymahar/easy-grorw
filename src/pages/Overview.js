@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect, useState, memo } from "react";
 import { useSelector } from "react-redux";
+import "../assets/overview.css";
 const Overview = () => {
-  const data = useSelector((state) => state.OverviewReducer.item);
+  const [data, setData] = useState({});
+  const fetchData = useSelector((state) => state.OverviewReducer.item);
+
+  const updateData = () => {
+    if (fetchData) {
+      setData(fetchData);
+    }
+  };
+  useEffect(() => {
+    updateData();
+  }, [fetchData]);
+
   console.log("overview page", data);
   return (
     <div>
@@ -9,28 +21,96 @@ const Overview = () => {
         <h4>items page</h4>
       </center>
 
-      <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img
-              src={data.recipe.image}
-              class="img-fluid rounded-start"
-              alt={data.recipe.label}
-            />
+      {Object.keys(data).length > 0 && (
+        <div className="card mb-3" id="overview_card">
+          <div className="row g-0" id="overview_top_section">
+            <div className="top_img_section">
+              <img
+                src={data.recipe.image}
+                className="img-fluid rounded-start"
+                alt={data.recipe.label}
+              />
+              <span className="dishtype_img">{data.recipe.dishType}</span>
+            </div>
+            <div className="top_text_section">
+              <div className="card-body" id="card_body">
+                <p id="meal_type">
+                  {" "}
+                  <span></span> {data.recipe.mealType}
+                </p>
+                <h5 className="card-title">{data.recipe.label}</h5>
+                {data.recipe.healthLabels.map((item, index) => {
+                  return (
+                    <span key={index} className="health_label">
+                      {item}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">{data.recipe.label}</h5>
-              <p class="card-text">{data.recipe.dishType}</p>
-              <p class="card-text">
-                <small class="text-muted">Last updated 3 mins ago</small>
+          <div className="overview_bottom_section">
+            <div className="section_one">
+              <p>{data.recipe.yield} servings</p>
+              <h5>
+                {Math.ceil(data.recipe.calories)} <span>Kcal</span>
+              </h5>
+            </div>
+            <div className="section_two">
+              <p>
+                <span></span> protein{" "}
+                <span>{Math.floor(data.recipe.digest[2].total)}</span>
+              </p>
+              <p>
+                <span></span> fat{" "}
+                <span>{Math.floor(data.recipe.digest[0].total)}</span>
+              </p>
+              <p>
+                <span></span> carbs{" "}
+                <span>{Math.floor(data.recipe.digest[1].total)}</span>
+              </p>
+            </div>
+            <div className="section_three">
+              <p>
+                Cholesterol{" "}
+                <span>
+                  {Math.floor(data.recipe.totalNutrients.CHOLE.quantity)}
+                </span>
+              </p>
+              <p>
+                Sodium{" "}
+                <span>
+                  {Math.floor(data.recipe.totalNutrients.NA.quantity)}
+                </span>{" "}
+              </p>
+              <p>
+                Calsium{" "}
+                <span>
+                  {Math.floor(data.recipe.totalNutrients.CA.quantity)}
+                </span>{" "}
+              </p>
+              <p>
+                Magnesium{" "}
+                <span>
+                  {Math.floor(data.recipe.totalNutrients.MG.quantity)}
+                </span>{" "}
+              </p>
+              <p>
+                Potassium{" "}
+                <span>{Math.floor(data.recipe.totalNutrients.K.quantity)}</span>{" "}
+              </p>
+              <p>
+                Iron{" "}
+                <span>
+                  {Math.floor(data.recipe.totalNutrients.FE.quantity)}
+                </span>{" "}
               </p>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
 
-export default Overview;
+export default memo(Overview);

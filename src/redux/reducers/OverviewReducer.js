@@ -8,7 +8,7 @@ const OverviewReducer = (state = initialState, { type, payload }) => {
       return { state, item: payload };
 
     default:
-      return state;
+      return { status: "pending" };
   }
 };
 export default OverviewReducer;

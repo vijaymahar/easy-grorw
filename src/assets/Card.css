@@ -7,10 +7,10 @@
 #card_img_capsul img {
   width: "100%";
   height: "100%";
-  animation-duration: 1s all ease;
+  transition: 0.5s all ease;
 }
 #card_img_capsul:hover img {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
 #card_body #card_title {

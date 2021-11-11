@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
@@ -11,8 +11,8 @@ import Error from "./pages/Error";
 import Allergies from "./pages/Allergies";
 import Diets from "./pages/Diets";
 import Nutrients from "./pages/Nutrients";
-import Overview from "./pages/Overview";
 import "./assets/Search.css";
+const Overview = lazy(() => import("./pages/Overview"));
 const App = () => {
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
@@ -66,14 +66,16 @@ const App = () => {
           </Col>
           <Col md={6} id="main_page">
             <Container className="mt-4">
-              <Routes>
-                <Route path="/" exact element={<Home data={results} />} />
-                {results.hits && <Route path="/error" element={<Error />} />}
-                <Route path="allergies" element={<Allergies />} />
-                <Route path="diets" element={<Diets />} />
-                <Route path="nutrients" element={<Nutrients />} />
-                <Route path="/overview" exact element={<Overview />} />
-              </Routes>
+              <Suspense fallback={<div>loading...</div>}>
+                <Routes>
+                  <Route path="/" exact element={<Home data={results} />} />
+                  {results.hits && <Route path="/error" element={<Error />} />}
+                  <Route path="allergies" element={<Allergies />} />
+                  <Route path="diets" element={<Diets />} />
+                  <Route path="nutrients" element={<Nutrients />} />
+                  <Route path="/overview" exact element={<Overview />} />
+                </Routes>
+              </Suspense>
             </Container>
           </Col>
           <Col md={3} id="search_page">
